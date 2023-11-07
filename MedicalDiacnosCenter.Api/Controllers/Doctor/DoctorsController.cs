@@ -1,33 +1,35 @@
 ﻿using MedicalDiacnosCenter.Api.Controllers.Commons;
 using MedicalDiacnosCenter.Api.Models;
 using MedicalDiacnosCenter.Service.Configurations.Filters;
+using MedicalDiacnosCenter.Service.DTOs.DoctorDTOs;
 using MedicalDiacnosCenter.Service.DTOs.PatientDTOs;
+using MedicalDiacnosCenter.Service.Interfaces.IDoctor;
 using MedicalDiacnosCenter.Service.Interfaces.IPatient;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MedicalDiacnosCenter.Api.Controllers.Patient
+namespace MedicalDiacnosCenter.Api.Controllers.Doctor
 {
-    public class PatientsController : BaseController
+    public class DoctorsController : BaseController
     {
-        private readonly IPatientService _patientService;
+        private readonly IDoctorService _doctorService;
 
-        public PatientsController(IPatientService patientService)
+        public DoctorsController(IDoctorService doctorService)
         {
-            this._patientService = patientService;
+            this._doctorService = doctorService;
         }
 
         ///<summary>
         ///Create patient
         ///</summary>
-        ///<param name="patientForCreationDto"></param>
+        ///<param name="doctorForCreationDto"></param>
         ///<returns></returns>
         [HttpPost]
-        public async Task<IActionResult> PostAsync(PatientForCreationDto patientForCreationDto)
+        public async Task<IActionResult> PostAsync(DoctorForCreationDto doctorForCreationDto)
             => Ok(new Response
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _patientService.AddAsync(patientForCreationDto)
+                Data = await _doctorService.AddAsync(doctorForCreationDto)
             });
 
         /// <summary>
@@ -41,7 +43,7 @@ namespace MedicalDiacnosCenter.Api.Controllers.Patient
         {
             Code = 200,
             Message = "Success",
-            Data = await _patientService.RetrieveAllAsync(@params)
+            Data = await _doctorService.RetrieveAllAsync(@params)
         });
 
         /// <summary>
@@ -55,7 +57,7 @@ namespace MedicalDiacnosCenter.Api.Controllers.Patient
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _patientService.RetrieveByIdAsync(id)
+                Data = await _doctorService.RetrieveByIdAsync(id)
             });
 
         /// <summary>
@@ -65,12 +67,12 @@ namespace MedicalDiacnosCenter.Api.Controllers.Patient
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] PatientForUpdateDto dto)
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] DoctorForUpdateDto dto)
             => Ok(new Response
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _patientService.ModifyAsync(id, dto)
+                Data = await _doctorService.ModifyAsync(id, dto)
             });
 
         /// <summary>
@@ -84,7 +86,7 @@ namespace MedicalDiacnosCenter.Api.Controllers.Patient
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _patientService.RemoveAsync(id)
+                Data = await _doctorService.RemoveAsync(id)
             });
     }
 }

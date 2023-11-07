@@ -35,7 +35,6 @@ public class PatientService : IPatientService
         var result = await this._patientRepository.InsertAsync(mappedPatient);
 
         return this._mapper.Map<PatientForResultDto>(result);
-    
     }
 
     public async Task<PatientForResultDto> ModifyAsync(long id, PatientForUpdateDto dto)
