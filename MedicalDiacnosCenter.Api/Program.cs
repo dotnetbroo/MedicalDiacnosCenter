@@ -1,4 +1,6 @@
+using MedicalDiacnosCenter.Api.Extensions;
 using MedicalDiacnosCenter.Data.DbContexts;
+using MedicalDiacnosCenter.Service.Meppers;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalDiacnosCenter.Api
@@ -22,6 +24,9 @@ namespace MedicalDiacnosCenter.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+
+            builder.Services.AddCustomServices();
+            builder.Services.AddAutoMapper(typeof(MapperProfile));
 
             var app = builder.Build();
 

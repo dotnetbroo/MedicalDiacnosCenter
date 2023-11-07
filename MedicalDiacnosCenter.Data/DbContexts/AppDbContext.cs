@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MedicalDiacnosCenter.Domain.Entities;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 namespace MedicalDiacnosCenter.Data.DbContexts;
 
@@ -58,6 +60,6 @@ public class AppDbContext : DbContext
             .HasDefaultValueSql("CURRENT_TIMESTAMP");
     }
 
-
+    
 
 }

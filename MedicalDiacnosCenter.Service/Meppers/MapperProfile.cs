@@ -7,9 +7,9 @@ using MedicalDiacnosCenter.Service.DTOs.PatientDTOs;
 
 namespace MedicalDiacnosCenter.Service.Meppers;
 
-public class MepperProfile : Profile
+public class MapperProfile : Profile
 {
-    public MepperProfile()
+    public MapperProfile()
     {
         // Patient
         CreateMap<Patient, PatientForResultDto>().ReverseMap();
