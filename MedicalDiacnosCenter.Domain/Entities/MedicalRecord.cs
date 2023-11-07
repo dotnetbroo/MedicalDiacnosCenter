@@ -8,7 +8,7 @@ public class MedicalRecord : Auditable
     public Doctor Doctor { get; set; }
     public long PatientId { get; set; }
     public Patient Patient { get; set; }
+    public string ImagePath { get; set; }
     public string Diagnosis {  get; set; }
-    public byte[] ImageData { get; set; }
     public DateTime RecordDateTime { get; set; }
 }

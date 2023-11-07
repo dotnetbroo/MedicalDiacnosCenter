@@ -9,4 +9,7 @@ public class Doctor : Auditable
     public string Specialty { get; set; }
     public string Email {  get; set; }
     public string Password { get; set; }
+
+    public ICollection<Appointment> Appointments { get; set; }
+    public ICollection<MedicalRecord> MedicalRecords { get; set; }
 }
