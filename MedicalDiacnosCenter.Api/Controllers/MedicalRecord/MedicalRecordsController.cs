@@ -2,37 +2,46 @@
 using MedicalDiacnosCenter.Api.Models;
 using MedicalDiacnosCenter.Service.Configurations.Filters;
 using MedicalDiacnosCenter.Service.DTOs.AppointmentDTOs;
+using MedicalDiacnosCenter.Service.DTOs.MedicalRecordDTO;
 using MedicalDiacnosCenter.Service.Interfaces.IAppointment;
+using MedicalDiacnosCenter.Service.Interfaces.IMedicalRecord;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
-namespace MedicalDiacnosCenter.Api.Controllers.Appointment
+namespace MedicalDiacnosCenter.Api.Controllers.MedicalRecord
 {
-    public class AppointmentsController : BaseController
+    public class MedicalRecordsController : BaseController
     {
-        private readonly IAppointmentService _appointmentService;
+        private readonly IMedicalRecordService _medicalRecordService;
 
-        public AppointmentsController(IAppointmentService appointmentService)
+        public MedicalRecordsController(IMedicalRecordService medicalRecordService)
         {
-            this._appointmentService = appointmentService;
+            this._medicalRecordService = medicalRecordService;
         }
 
         ///<summary>
-        ///Create appointment
+        ///Create medical record
         ///</summary>
-        ///<param name="appointmentForCreationDto"></param>
+        ///<param name="medicalRecordForCreation"></param>
         ///<returns></returns>
         [HttpPost]
-        public async Task<IActionResult> PostAsync(AppointmentForCreationDto appointmentForCreationDto)
-            => Ok(await _appointmentService.AddAsync(appointmentForCreationDto));
+        public async Task<IActionResult> PostAsync([FromForm] MedicalRecordForCreationDto dto)
+        {
+            var imagePath = await _medicalRecordService.UplodeImage(dto.formFile);
+            dto.ImagePath = imagePath;
+
+            return Ok(await _medicalRecordService.AddAsync(dto));
+        }
+
 
         /// <summary>
-        /// Get all appointments
+        /// Get all medical records
         /// </summary>
         /// <param name="params"></param>
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
-            => Ok(await _appointmentService.RetrieveAllAsync(@params));
+            => Ok(await _medicalRecordService.RetrieveAllAsync(@params));
 
         /// <summary>
         /// Get by id
@@ -41,7 +50,7 @@ namespace MedicalDiacnosCenter.Api.Controllers.Appointment
         /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
-            => Ok(await _appointmentService.RetrieveByIdAsync(id));
+            => Ok(await _medicalRecordService.RetrieveByIdAsync(id));
 
         /// <summary>
         /// Update patient info
@@ -50,8 +59,8 @@ namespace MedicalDiacnosCenter.Api.Controllers.Appointment
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] AppointmentForUpdateDto dto)
-            => Ok(await _appointmentService.ModifyAsync(id, dto));
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] MedicalRecordForUpdateDto dto)
+            => Ok(await _medicalRecordService.ModifyAsync(id, dto));
 
         /// <summary>
         /// Delete by id
@@ -60,6 +69,8 @@ namespace MedicalDiacnosCenter.Api.Controllers.Appointment
         /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeleteAsync([FromRoute(Name = "id")] long id)
-             => Ok(await _appointmentService.RemoveAsync(id));
+            => Ok(await _medicalRecordService.RemoveAsync(id));
+
+
     }
 }

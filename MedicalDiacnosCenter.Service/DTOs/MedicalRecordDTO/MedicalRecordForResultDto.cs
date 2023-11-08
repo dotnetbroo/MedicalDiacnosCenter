@@ -1,13 +1,14 @@
 ﻿using MedicalDiacnosCenter.Domain.Entities;
+using MedicalDiacnosCenter.Service.DTOs.DoctorDTOs;
+using MedicalDiacnosCenter.Service.DTOs.PatientDTOs;
 
 namespace MedicalDiacnosCenter.Service.DTOs.MedicalRecordDTO;
 
 public class MedicalRecordForResultDto
 {
-    public long DoctorId { get; set; }
-    public Doctor Doctor { get; set; }
-    public long PatientId { get; set; }
-    public Patient Patient { get; set; }
+    public long Id { get; set; }
     public string Diagnosis { get; set; }
-    public DateTime RecordDateTime { get; set; }
+    public DoctorForAppoinmentResultDto Doctor { get; set; }
+    public PatientForAppointmentResultDto Patient { get; set; }
+    public string ImagePath { get; set; }
 }

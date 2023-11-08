@@ -23,12 +23,8 @@ namespace MedicalDiacnosCenter.Api.Controllers.Doctor
         ///<returns></returns>
         [HttpPost]
         public async Task<IActionResult> PostAsync(DoctorForCreationDto doctorForCreationDto)
-            => Ok(new Response
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await _doctorService.AddAsync(doctorForCreationDto)
-            });
+                    => Ok(await _doctorService.AddAsync(doctorForCreationDto));
+
 
         /// <summary>
         /// Get all doctors
@@ -37,12 +33,7 @@ namespace MedicalDiacnosCenter.Api.Controllers.Doctor
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAllAsync([FromQuery] PaginationParams @params)
-        => Ok(new Response
-        {
-            Code = 200,
-            Message = "Success",
-            Data = await _doctorService.RetrieveAllAsync(@params)
-        });
+            => Ok(await _doctorService.RetrieveAllAsync(@params));
 
         /// <summary>
         /// Get by id
@@ -51,12 +42,7 @@ namespace MedicalDiacnosCenter.Api.Controllers.Doctor
         /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync([FromRoute(Name = "id")] long id)
-            => Ok(new Response
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await _doctorService.RetrieveByIdAsync(id)
-            });
+            => Ok(await _doctorService.RetrieveByIdAsync(id));
 
         /// <summary>
         /// Update patient info
@@ -66,12 +52,7 @@ namespace MedicalDiacnosCenter.Api.Controllers.Doctor
         /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] DoctorForUpdateDto dto)
-            => Ok(new Response
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await _doctorService.ModifyAsync(id, dto)
-            });
+            => Ok(await _doctorService.ModifyAsync(id, dto));
 
         /// <summary>
         /// Delete by id
@@ -80,11 +61,6 @@ namespace MedicalDiacnosCenter.Api.Controllers.Doctor
         /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeleteAsync([FromRoute(Name = "id")] long id)
-            => Ok(new Response
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await _doctorService.RemoveAsync(id)
-            });
+            => Ok(await _doctorService.RemoveAsync(id));
     }
 }

@@ -23,7 +23,7 @@ namespace MedicalDiacnosCenter.Api.Middlewares
             catch (CostumException ex)
             {
                 context.Response.StatusCode = ex.StatusCode;
-                await context.Response.WriteAsJsonAsync(new Response
+                await context.Response.WriteAsJsonAsync(new 
                 {
                     Code = ex.StatusCode,
                     Message = ex.Message
@@ -33,7 +33,7 @@ namespace MedicalDiacnosCenter.Api.Middlewares
             {
                 this.logger.LogError($"{ex}\n\n");
                 context.Response.StatusCode = 500;
-                await context.Response.WriteAsJsonAsync(new Response
+                await context.Response.WriteAsJsonAsync(new 
                 {
                     Code = 500,
                     Message = ex.Message

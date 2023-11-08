@@ -1,8 +1,10 @@
 using MedicalDiacnosCenter.Api.Extensions;
 using MedicalDiacnosCenter.Data.DbContexts;
+using MedicalDiacnosCenter.Service.Helpers;
 using MedicalDiacnosCenter.Service.Meppers;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Text.Json.Serialization;
 
 namespace MedicalDiacnosCenter.Api
 {
@@ -39,6 +41,8 @@ namespace MedicalDiacnosCenter.Api
 
             var app = builder.Build();
 
+
+            EnvironmentHelper.WebRootPath = Path.GetFullPath("wwwroot");
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

@@ -66,6 +66,21 @@ namespace MedicalDiacnosCenter.Service.Services.Appointments
             if (appointment is null)
                 throw new CostumException(404, "Appointment is not found");
 
+            var patient = await _patientRepository.SelectAll()
+                .Where(p => p.Id == dto.PatientId)
+                .FirstOrDefaultAsync();
+
+            if (patient is null)
+                throw new CostumException(404, "Patient is not found");
+
+            var doctor = await _doctorRepository.SelectAll()
+                .Where(d => d.Id == dto.DoctorId)
+                .FirstOrDefaultAsync();
+
+            if (doctor is null)
+                throw new CostumException(404, "Doctor is not found");
+
+
             var mappedAppointment = _mapper.Map(dto, appointment);
             mappedAppointment.UpdatedAt = DateTime.UtcNow;
 
@@ -105,7 +120,7 @@ namespace MedicalDiacnosCenter.Service.Services.Appointments
                 .Include(a => a.Doctor)
                 .FirstOrDefaultAsync();
             if (appointment is null)
-                throw new CostumException(404, "Appointment not found");
+                throw new CostumException(404, "Appointment is not found");
 
             return _mapper.Map<AppointmentForResultDto>(appointment);
         }

@@ -70,9 +70,8 @@ public class PatientService : IPatientService
     {
         var patients = await _patientRepository.SelectAll()
             .Include(pa => pa.Appointments)
-            .Include(ma => ma.MedicalRecords)
+            .Include(mr => mr.MedicalRecords)
             .ToPagedList(@params)
-            .AsNoTracking()
             .ToListAsync();
 
         return _mapper.Map<IEnumerable<PatientForResultDto>>(patients);
@@ -83,7 +82,7 @@ public class PatientService : IPatientService
         var patient = await _patientRepository.SelectAll()
             .Where(p => p.Id == id)
             .Include(a => a.Appointments)
-            .Include(m => m.MedicalRecords)
+            .Include(mr => mr.MedicalRecords)
             .AsNoTracking()
             .FirstOrDefaultAsync();
 
@@ -92,4 +91,5 @@ public class PatientService : IPatientService
 
         return _mapper.Map<PatientForResultDto>(patient);
     }
+
 }

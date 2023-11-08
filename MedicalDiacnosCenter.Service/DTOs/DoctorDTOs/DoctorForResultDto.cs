@@ -9,6 +9,7 @@ public class DoctorForResultDto
     public string LastName { get; set; }
     public string Specialty { get; set; }
 
+
     public ICollection<Appointment> Appointments { get; set; }
     public ICollection<MedicalRecord> MedicalRecords { get; set; }
 }
