@@ -8,5 +8,6 @@ public class Appointment : Auditable
     public Doctor Doctor { get; set; }
     public long PatientId { get; set; }
     public Patient Patient { get; set; }
+    public string ReasonFromAppointment {  get; set; }
     public DateTime AppointmentDateTime { get; set; }
 }

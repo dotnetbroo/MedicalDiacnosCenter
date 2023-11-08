@@ -15,11 +15,13 @@ public class MapperProfile : Profile
         CreateMap<Patient, PatientForResultDto>().ReverseMap();
         CreateMap<Patient, PatientForUpdateDto>().ReverseMap();
         CreateMap<Patient, PatientForCreationDto>().ReverseMap();
+        CreateMap<Patient, PatientForAppointmentResultDto>().ReverseMap();
 
         // Doctor
         CreateMap<Doctor,DoctorForUpdateDto>().ReverseMap();
         CreateMap<Doctor, DoctorForResultDto>().ReverseMap();
         CreateMap<Doctor, DoctorForCreationDto>().ReverseMap();
+        CreateMap<Doctor, DoctorForAppoinmentResultDto>().ReverseMap();
 
         // Appointment
         CreateMap<Appointment, AppointmentForResultDto>().ReverseMap();

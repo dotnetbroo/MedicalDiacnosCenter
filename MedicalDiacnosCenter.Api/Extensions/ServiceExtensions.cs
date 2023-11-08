@@ -1,7 +1,9 @@
 ﻿using MedicalDiacnosCenter.Data.IRepositories;
 using MedicalDiacnosCenter.Data.Repositories;
+using MedicalDiacnosCenter.Service.Interfaces.IAppointment;
 using MedicalDiacnosCenter.Service.Interfaces.IDoctor;
 using MedicalDiacnosCenter.Service.Interfaces.IPatient;
+using MedicalDiacnosCenter.Service.Services.Appointments;
 using MedicalDiacnosCenter.Service.Services.Doctors;
 using MedicalDiacnosCenter.Service.Services.Patients;
 
@@ -13,6 +15,7 @@ namespace MedicalDiacnosCenter.Api.Extensions
         {
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
 

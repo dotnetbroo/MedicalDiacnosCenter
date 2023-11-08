@@ -2,6 +2,7 @@ using MedicalDiacnosCenter.Api.Extensions;
 using MedicalDiacnosCenter.Data.DbContexts;
 using MedicalDiacnosCenter.Service.Meppers;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace MedicalDiacnosCenter.Api
 {
@@ -27,6 +28,14 @@ namespace MedicalDiacnosCenter.Api
 
             builder.Services.AddCustomServices();
             builder.Services.AddAutoMapper(typeof(MapperProfile));
+
+            // logger
+            var logger = new LoggerConfiguration()
+              .ReadFrom.Configuration(builder.Configuration)
+              .Enrich.FromLogContext()
+              .CreateLogger();
+            builder.Logging.ClearProviders();
+            builder.Logging.AddSerilog(logger);
 
             var app = builder.Build();
 

@@ -1,37 +1,37 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MedicalDiacnosCenter.Api.Controllers.Commons;
 using MedicalDiacnosCenter.Api.Models;
-using MedicalDiacnosCenter.Service.DTOs.DoctorDTOs;
-using MedicalDiacnosCenter.Api.Controllers.Commons;
-using MedicalDiacnosCenter.Service.Interfaces.IDoctor;
 using MedicalDiacnosCenter.Service.Configurations.Filters;
+using MedicalDiacnosCenter.Service.DTOs.AppointmentDTOs;
+using MedicalDiacnosCenter.Service.Interfaces.IAppointment;
+using Microsoft.AspNetCore.Mvc;
 
-namespace MedicalDiacnosCenter.Api.Controllers.Doctor
+namespace MedicalDiacnosCenter.Api.Controllers.Appointment
 {
-    public class DoctorsController : BaseController
+    public class AppointmentsController : BaseController
     {
-        private readonly IDoctorService _doctorService;
+        private readonly IAppointmentService _appointmentService;
 
-        public DoctorsController(IDoctorService doctorService)
+        public AppointmentsController(IAppointmentService appointmentService)
         {
-            this._doctorService = doctorService;
+            this._appointmentService = appointmentService;
         }
 
         ///<summary>
-        ///Create doctor
+        ///Create appointment
         ///</summary>
-        ///<param name="doctorForCreationDto"></param>
+        ///<param name="appointmentForCreationDto"></param>
         ///<returns></returns>
         [HttpPost]
-        public async Task<IActionResult> PostAsync(DoctorForCreationDto doctorForCreationDto)
+        public async Task<IActionResult> PostAsync(AppointmentForCreationDto appointmentForCreationDto)
             => Ok(new Response
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _doctorService.AddAsync(doctorForCreationDto)
+                Data = await _appointmentService.AddAsync(appointmentForCreationDto)
             });
 
         /// <summary>
-        /// Get all doctors
+        /// Get all appointments
         /// </summary>
         /// <param name="params"></param>
         /// <returns></returns>
@@ -41,7 +41,7 @@ namespace MedicalDiacnosCenter.Api.Controllers.Doctor
         {
             Code = 200,
             Message = "Success",
-            Data = await _doctorService.RetrieveAllAsync(@params)
+            Data = await _appointmentService.RetrieveAllAsync(@params)
         });
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace MedicalDiacnosCenter.Api.Controllers.Doctor
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _doctorService.RetrieveByIdAsync(id)
+                Data = await _appointmentService.RetrieveByIdAsync(id)
             });
 
         /// <summary>
@@ -65,12 +65,12 @@ namespace MedicalDiacnosCenter.Api.Controllers.Doctor
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] DoctorForUpdateDto dto)
+        public async Task<IActionResult> PutAsync([FromRoute(Name = "id")] long id, [FromBody] AppointmentForUpdateDto dto)
             => Ok(new Response
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _doctorService.ModifyAsync(id, dto)
+                Data = await _appointmentService.ModifyAsync(id, dto)
             });
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace MedicalDiacnosCenter.Api.Controllers.Doctor
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _doctorService.RemoveAsync(id)
+                Data = await _appointmentService.RemoveAsync(id)
             });
     }
 }
