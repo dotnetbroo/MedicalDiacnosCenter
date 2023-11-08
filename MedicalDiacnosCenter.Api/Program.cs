@@ -1,10 +1,9 @@
+using Serilog;
+using Microsoft.EntityFrameworkCore;
 using MedicalDiacnosCenter.Api.Extensions;
 using MedicalDiacnosCenter.Data.DbContexts;
 using MedicalDiacnosCenter.Service.Helpers;
 using MedicalDiacnosCenter.Service.Meppers;
-using Microsoft.EntityFrameworkCore;
-using Serilog;
-using System.Text.Json.Serialization;
 
 namespace MedicalDiacnosCenter.Api
 {
